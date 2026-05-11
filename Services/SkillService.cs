@@ -1,0 +1,58 @@
+﻿using HRCandidateManagement.DTOs;
+using HRCandidateManagement.Models;
+using HRCandidateManagement.Repositories;
+
+namespace HRCandidateManagement.Services;
+
+public class SkillService : ISkillService
+{
+    private readonly ISkillRepository _skillRepository;
+
+    public SkillService(ISkillRepository skillRepository)
+    {
+        _skillRepository = skillRepository;
+    }
+
+    public async Task<IEnumerable<SkillResponseDto>> GetAllAsync()
+    {
+        var skills = await _skillRepository.GetAllAsync();
+        return skills.Select(MapToResponseDto).ToList();
+    }
+
+    public async Task<SkillResponseDto?> GetByIdAsync(int id)
+    {
+        var skill = await _skillRepository.GetByIdAsync(id);
+        return skill == null ? null : MapToResponseDto(skill);
+    }
+
+    public async Task<SkillResponseDto> AddAsync(SkillCreateDto skillCreateDto)
+    {
+        var existingSkill = await _skillRepository.GetByNameAsync(skillCreateDto.Name);
+        if (existingSkill != null)
+        {
+            throw new InvalidOperationException("Skill name already exists.");
+        }
+
+        var skill = new Skill
+        {
+            Name = skillCreateDto.Name
+        };
+
+        var createdSkill = await _skillRepository.AddAsync(skill);
+        return MapToResponseDto(createdSkill);
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        return await _skillRepository.DeleteAsync(id);
+    }
+
+    private SkillResponseDto MapToResponseDto(Skill skill)
+    {
+        return new SkillResponseDto
+        {
+            Id = skill.Id,
+            Name = skill.Name
+        };
+    }
+}

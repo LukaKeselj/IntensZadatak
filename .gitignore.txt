@@ -1,0 +1,26 @@
+## Visual Studio privremeni fajlovi i folderi
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.userosscache
+*.sln.docstates
+
+## Izgrađeni paketi i ostalo
+*.exe
+*.dll
+*.pdb
+*.suo
+
+## Ako koristiš NuGet, ignoriši i ove foldere
+packages/
+*.nupkg
+
+## User-specific fajlovi
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Log fajlovi
+*.log
