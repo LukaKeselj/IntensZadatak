@@ -1,10 +1,5 @@
 Najzanimljiviji deo: Clean Architecture
-Za višeslojnu arhitekturu sam se odlučio jer mi je taj pristup najpoznatiji sa fakulteta. 
-Želeo sam da primenim akademsko znanje u praksi i osiguram jasnu podelu između biznis logike i pristupa podacima. 
-Ovakav dizajn čini kod profesionalnim, lakšim za održavanje i spremnim za dalje proširivanje.
+Za višeslojnu arhitekturu sam se odlučio jer mi je taj pristup najbliži iz studija. Želeo sam da primenim akademsko znanje u praksi i osiguram jasnu podelu između poslovne logike i sloja za pristup podacima. Ovakav dizajn čini kod profesionalnim, lakšim za održavanje i spremnim za dalje proširivanje.
 
-Najzahtevniji deo: Pisanje Unit testova
-Implementacija 83 testova bila je najteži zadatak jer je zahtevala pokrivanje svih scenarija 
-– od validacije unosa (poput case-insensitive mejlova) do kompleksnih Many-to-Many relacija. 
-Najveći izazov bio je pravilno setovanje Moq biblioteke i osiguravanje potpune izolacije testova pomoću in-memory baze podataka. 
-Cilj mi je bio da kroz visok nivo pokrivenosti dokažem stabilnost i otpornost aplikacije na greške.
+Najzahtevniji deo: Pisanje unit testova
+Implementacija 83 testa bila je najzahtevniji deo projekta, jer je podrazumevala pokrivanje svih scenarija — od validacije unosa (poput prepoznavanja mejlova bez obzira na veličinu slova) do složenih many-to-many relacija. Najveći izazov bio je ispravno konfigurisanje Moq biblioteke i obezbeđivanje potpune izolacije testova pomoću in-memory baze podataka. Cilj mi je bio da visokim stepenom pokrivenosti dokažem stabilnost aplikacije i njenu otpornost na greške.
