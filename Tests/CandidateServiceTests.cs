@@ -201,42 +201,77 @@ public class CandidateServiceTests
     [Fact]
     public async Task AddAsync_WithExistingEmail_ThrowsInvalidOperationException()
     {
-        var existingCandidate = CreateTestCandidate(1, "Existing User", "john@example.com");
         var candidateCreateDto = new CandidateCreateDto
         {
             FullName = "John Doe",
             Email = "john@example.com"
         };
 
-        _mockCandidateRepository.Setup(r => r.GetAllAsync())
-            .ReturnsAsync(new List<Candidate> { existingCandidate });
+        _mockCandidateRepository.Setup(r => r.AddAsync(It.IsAny<Candidate>()))
+            .ThrowsAsync(new InvalidOperationException("Email already exists."));
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
             () => _candidateService.AddAsync(candidateCreateDto)
         );
 
         Assert.Equal("Email already exists.", exception.Message);
-        _mockCandidateRepository.Verify(r => r.AddAsync(It.IsAny<Candidate>()), Times.Never);
     }
 
     [Fact]
     public async Task AddAsync_WithExistingEmailDifferentCase_ThrowsInvalidOperationException()
     {
-        var existingCandidate = CreateTestCandidate(1, "Existing User", "John@Example.com");
         var candidateCreateDto = new CandidateCreateDto
         {
             FullName = "New User",
             Email = "john@example.com"
         };
 
-        _mockCandidateRepository.Setup(r => r.GetAllAsync())
-            .ReturnsAsync(new List<Candidate> { existingCandidate });
+        _mockCandidateRepository.Setup(r => r.AddAsync(It.IsAny<Candidate>()))
+            .ThrowsAsync(new InvalidOperationException("Email already exists."));
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
             () => _candidateService.AddAsync(candidateCreateDto)
         );
 
         Assert.Equal("Email already exists.", exception.Message);
+    }
+
+    [Fact]
+    public async Task AddAsync_WithExistingName_ThrowsInvalidOperationException()
+    {
+        var candidateCreateDto = new CandidateCreateDto
+        {
+            FullName = "John Doe",
+            Email = "newuser@example.com"
+        };
+
+        _mockCandidateRepository.Setup(r => r.AddAsync(It.IsAny<Candidate>()))
+            .ThrowsAsync(new InvalidOperationException("Candidate name already exists."));
+
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => _candidateService.AddAsync(candidateCreateDto)
+        );
+
+        Assert.Equal("Candidate name already exists.", exception.Message);
+    }
+
+    [Fact]
+    public async Task AddAsync_WithExistingNameDifferentCase_ThrowsInvalidOperationException()
+    {
+        var candidateCreateDto = new CandidateCreateDto
+        {
+            FullName = "john doe",
+            Email = "newuser@example.com"
+        };
+
+        _mockCandidateRepository.Setup(r => r.AddAsync(It.IsAny<Candidate>()))
+            .ThrowsAsync(new InvalidOperationException("Candidate name already exists."));
+
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => _candidateService.AddAsync(candidateCreateDto)
+        );
+
+        Assert.Equal("Candidate name already exists.", exception.Message);
     }
 
     #endregion
@@ -269,6 +304,9 @@ public class CandidateServiceTests
         _mockCandidateRepository.Setup(r => r.GetAllAsync())
             .ReturnsAsync(new List<Candidate>());
 
+        _mockCandidateRepository.Setup(r => r.GetByNameAsync("Updated Name"))
+            .ReturnsAsync((Candidate?)null);
+
         _mockCandidateRepository.Setup(r => r.UpdateAsync(candidateId, It.IsAny<Candidate>()))
             .ReturnsAsync(updatedCandidate);
 
@@ -296,21 +334,68 @@ public class CandidateServiceTests
     {
         int candidateId = 1;
         var existingCandidate = CreateTestCandidate(candidateId, "John Doe", "john@example.com");
-        var anotherCandidate = CreateTestCandidate(2, "Jane Smith", "jane@example.com");
-
         var updateDto = new CandidateUpdateDto { Email = "jane@example.com" };
 
         _mockCandidateRepository.Setup(r => r.GetByIdAsync(candidateId))
             .ReturnsAsync(existingCandidate);
 
-        _mockCandidateRepository.Setup(r => r.GetAllAsync())
-            .ReturnsAsync(new List<Candidate> { existingCandidate, anotherCandidate });
+        _mockCandidateRepository.Setup(r => r.UpdateAsync(candidateId, It.IsAny<Candidate>()))
+            .ThrowsAsync(new InvalidOperationException("Email already exists."));
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
             () => _candidateService.UpdateAsync(candidateId, updateDto)
         );
 
         Assert.Equal("Email already exists.", exception.Message);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithExistingName_ThrowsInvalidOperationException()
+    {
+        int candidateId = 1;
+        var existingCandidate = CreateTestCandidate(candidateId, "John Doe");
+        var updateDto = new CandidateUpdateDto { FullName = "Jane Smith" };
+
+        _mockCandidateRepository.Setup(r => r.GetByIdAsync(candidateId))
+            .ReturnsAsync(existingCandidate);
+
+        _mockCandidateRepository.Setup(r => r.UpdateAsync(candidateId, It.IsAny<Candidate>()))
+            .ThrowsAsync(new InvalidOperationException("Candidate name already exists."));
+
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => _candidateService.UpdateAsync(candidateId, updateDto)
+        );
+
+        Assert.Equal("Candidate name already exists.", exception.Message);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithSameName_UpdatesSuccessfully()
+    {
+        int candidateId = 1;
+        var existingCandidate = CreateTestCandidate(candidateId, "John Doe");
+        var updateDto = new CandidateUpdateDto { FullName = "John Doe" };
+
+        var updatedCandidate = new Candidate
+        {
+            Id = candidateId,
+            FullName = "John Doe",
+            DateOfBirth = existingCandidate.DateOfBirth,
+            ContactNumber = existingCandidate.ContactNumber,
+            Email = existingCandidate.Email
+        };
+
+        _mockCandidateRepository.Setup(r => r.GetByIdAsync(candidateId))
+            .ReturnsAsync(existingCandidate);
+
+        _mockCandidateRepository.Setup(r => r.UpdateAsync(candidateId, It.IsAny<Candidate>()))
+            .ReturnsAsync(updatedCandidate);
+
+        var result = await _candidateService.UpdateAsync(candidateId, updateDto);
+
+        Assert.NotNull(result);
+        Assert.Equal("John Doe", result.FullName);
+        _mockCandidateRepository.Verify(r => r.UpdateAsync(candidateId, It.IsAny<Candidate>()), Times.Once);
     }
 
     #endregion

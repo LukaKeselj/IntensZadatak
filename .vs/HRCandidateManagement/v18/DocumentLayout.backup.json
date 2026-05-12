@@ -1,0 +1,527 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\dtos\\candidatecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:dtos\\candidatecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\dtos\\candidateresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:dtos\\candidateresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\dtos\\candidateupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:dtos\\candidateupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\dtos\\skillcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:dtos\\skillcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\dtos\\skillresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:dtos\\skillresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\dtos\\skillupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:dtos\\skillupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\migrations\\20260511165758_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:migrations\\20260511165758_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:migrations\\appdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:models\\candidate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\models\\skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:models\\skill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:repositories\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\repositories\\icandidaterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:repositories\\icandidaterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\repositories\\candidaterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:repositories\\candidaterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\repositories\\iskillrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:repositories\\iskillrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\repositories\\skillrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:repositories\\skillrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\services\\candidateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:services\\candidateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\services\\icandidateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:services\\icandidateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\services\\iskillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:services\\iskillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\services\\skillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:services\\skillservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\tests\\candidaterepositorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:tests\\candidaterepositorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\tests\\candidateservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:tests\\candidateservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\tests\\skillrepositorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:tests\\skillrepositorytests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\tests\\skillservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:tests\\skillservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\controllers\\skillscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:controllers\\skillscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\controllers\\candidatescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:controllers\\candidatescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|c:\\users\\lukak\\desktop\\intenszadatak\\intenszadatak\\hrcandidatemanagement.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{279704C1-78B8-0FA0-FA38-6E60EA515EE9}|HRCandidateManagement.csproj|solutionrelative:hrcandidatemanagement.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SkillUpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\SkillUpdateDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\SkillUpdateDto.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\SkillUpdateDto.cs",
+              "RelativeToolTip": "DTOs\\SkillUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T08:37:10.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SkillResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\SkillResponseDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\SkillResponseDto.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\SkillResponseDto.cs",
+              "RelativeToolTip": "DTOs\\SkillResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:35:04.999Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SkillCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\SkillCreateDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\SkillCreateDto.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\SkillCreateDto.cs",
+              "RelativeToolTip": "DTOs\\SkillCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:35:02.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CandidateUpdateDto.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\CandidateUpdateDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\CandidateUpdateDto.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\CandidateUpdateDto.cs",
+              "RelativeToolTip": "DTOs\\CandidateUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:35:00.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CandidateResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\CandidateResponseDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\CandidateResponseDto.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\CandidateResponseDto.cs",
+              "RelativeToolTip": "DTOs\\CandidateResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:58.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CandidateCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\CandidateCreateDto.cs",
+              "RelativeDocumentMoniker": "DTOs\\CandidateCreateDto.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\DTOs\\CandidateCreateDto.cs",
+              "RelativeToolTip": "DTOs\\CandidateCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:55.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T19:44:03.414Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-05-11T19:13:31.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20260511165758_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Migrations\\20260511165758_InitialCreate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260511165758_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Migrations\\20260511165758_InitialCreate.cs",
+              "RelativeToolTip": "Migrations\\20260511165758_InitialCreate.cs",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAgwEoAAAB0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:35:07.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "Migrations\\AppDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Migrations\\AppDbContextModelSnapshot.cs",
+              "RelativeToolTip": "Migrations\\AppDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAN8AAAAAAAAAAAAgwIkAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T18:14:41.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Candidate.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Models\\Candidate.cs",
+              "RelativeDocumentMoniker": "Models\\Candidate.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Models\\Candidate.cs",
+              "RelativeToolTip": "Models\\Candidate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T18:15:52.084Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Skill.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Models\\Skill.cs",
+              "RelativeDocumentMoniker": "Models\\Skill.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Models\\Skill.cs",
+              "RelativeToolTip": "Models\\Skill.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T18:15:55.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\IRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\IRepository.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\IRepository.cs*",
+              "RelativeToolTip": "Repositories\\IRepository.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:10:56.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ICandidateRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\ICandidateRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\ICandidateRepository.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\ICandidateRepository.cs",
+              "RelativeToolTip": "Repositories\\ICandidateRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:07.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CandidateRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\CandidateRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\CandidateRepository.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\CandidateRepository.cs",
+              "RelativeToolTip": "Repositories\\CandidateRepository.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAADgv0EAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T18:15:59.379Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ISkillRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\ISkillRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\ISkillRepository.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\ISkillRepository.cs",
+              "RelativeToolTip": "Repositories\\ISkillRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:33.941Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SkillRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\SkillRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\SkillRepository.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Repositories\\SkillRepository.cs",
+              "RelativeToolTip": "Repositories\\SkillRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:36.17Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "CandidateService.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Services\\CandidateService.cs",
+              "RelativeDocumentMoniker": "Services\\CandidateService.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Services\\CandidateService.cs",
+              "RelativeToolTip": "Services\\CandidateService.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:38.28Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ICandidateService.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Services\\ICandidateService.cs",
+              "RelativeDocumentMoniker": "Services\\ICandidateService.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Services\\ICandidateService.cs",
+              "RelativeToolTip": "Services\\ICandidateService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:41.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ISkillService.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Services\\ISkillService.cs",
+              "RelativeDocumentMoniker": "Services\\ISkillService.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Services\\ISkillService.cs",
+              "RelativeToolTip": "Services\\ISkillService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:44.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "SkillService.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Services\\SkillService.cs",
+              "RelativeDocumentMoniker": "Services\\SkillService.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Services\\SkillService.cs",
+              "RelativeToolTip": "Services\\SkillService.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAA9wDIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:34:46.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CandidateRepositoryTests.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Tests\\CandidateRepositoryTests.cs",
+              "RelativeDocumentMoniker": "Tests\\CandidateRepositoryTests.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Tests\\CandidateRepositoryTests.cs",
+              "RelativeToolTip": "Tests\\CandidateRepositoryTests.cs",
+              "ViewState": "AgIAAHMCAAAAAAAAAAAowIECAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:57:17.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "CandidateServiceTests.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Tests\\CandidateServiceTests.cs",
+              "RelativeDocumentMoniker": "Tests\\CandidateServiceTests.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Tests\\CandidateServiceTests.cs",
+              "RelativeToolTip": "Tests\\CandidateServiceTests.cs",
+              "ViewState": "AgIAAKsBAAAAAAAAAAAAACgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:56:51.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "SkillRepositoryTests.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Tests\\SkillRepositoryTests.cs",
+              "RelativeDocumentMoniker": "Tests\\SkillRepositoryTests.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Tests\\SkillRepositoryTests.cs",
+              "RelativeToolTip": "Tests\\SkillRepositoryTests.cs",
+              "ViewState": "AgIAAEwBAAAAAAAAAAAAAEoBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:49:34.068Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "SkillServiceTests.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Tests\\SkillServiceTests.cs",
+              "RelativeDocumentMoniker": "Tests\\SkillServiceTests.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Tests\\SkillServiceTests.cs",
+              "RelativeToolTip": "Tests\\SkillServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:49:21.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": ".gitignore.txt",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\.gitignore.txt",
+              "RelativeDocumentMoniker": ".gitignore.txt",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\.gitignore.txt",
+              "RelativeToolTip": ".gitignore.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-05-12T09:16:08.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "SkillsController.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Controllers\\SkillsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SkillsController.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Controllers\\SkillsController.cs",
+              "RelativeToolTip": "Controllers\\SkillsController.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAhwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:10:06.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:10:12.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "CandidatesController.cs",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Controllers\\CandidatesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CandidatesController.cs",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\Controllers\\CandidatesController.cs",
+              "RelativeToolTip": "Controllers\\CandidatesController.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-11T17:09:53.976Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "HRCandidateManagement.csproj",
+              "DocumentMoniker": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\HRCandidateManagement.csproj",
+              "RelativeDocumentMoniker": "HRCandidateManagement.csproj",
+              "ToolTip": "C:\\Users\\lukak\\Desktop\\IntensZadatak\\IntensZadatak\\HRCandidateManagement.csproj",
+              "RelativeToolTip": "HRCandidateManagement.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-11T17:49:40.995Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

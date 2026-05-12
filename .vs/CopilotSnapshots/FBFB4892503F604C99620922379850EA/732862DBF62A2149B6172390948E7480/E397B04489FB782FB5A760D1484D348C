@@ -1,0 +1,130 @@
+﻿using HRCandidateManagement.DTOs;
+using HRCandidateManagement.Models;
+using HRCandidateManagement.Repositories;
+
+namespace HRCandidateManagement.Services;
+
+public class CandidateService : ICandidateService
+{
+    private readonly ICandidateRepository _candidateRepository;
+    private readonly ISkillRepository _skillRepository;
+
+    public CandidateService(ICandidateRepository candidateRepository, ISkillRepository skillRepository)
+    {
+        _candidateRepository = candidateRepository;
+        _skillRepository = skillRepository;
+    }
+
+    public async Task<IEnumerable<CandidateResponseDto>> GetAllAsync()
+    {
+        var candidates = await _candidateRepository.GetAllAsync();
+        return candidates.Select(MapToResponseDto).ToList();
+    }
+
+    public async Task<CandidateResponseDto?> GetByIdAsync(int id)
+    {
+        var candidate = await _candidateRepository.GetByIdAsync(id);
+        return candidate == null ? null : MapToResponseDto(candidate);
+    }
+
+    public async Task<CandidateResponseDto?> GetByNameAsync(string name)
+    {
+        var candidate = await _candidateRepository.GetByNameAsync(name);
+        return candidate == null ? null : MapToResponseDto(candidate);
+    }
+
+    public async Task<IEnumerable<CandidateResponseDto>> SearchAsync(string? name, IEnumerable<string>? skillNames)
+    {
+        var candidates = await _candidateRepository.SearchAsync(name, skillNames);
+        return candidates.Select(MapToResponseDto).ToList();
+    }
+
+    public async Task<CandidateResponseDto> AddAsync(CandidateCreateDto candidateCreateDto)
+    {
+        var candidate = new Candidate
+        {
+            FullName = candidateCreateDto.FullName,
+            DateOfBirth = candidateCreateDto.DateOfBirth,
+            ContactNumber = candidateCreateDto.ContactNumber,
+            Email = candidateCreateDto.Email
+        };
+
+        try
+        {
+            var createdCandidate = await _candidateRepository.AddAsync(candidate);
+            return MapToResponseDto(createdCandidate);
+        }
+        catch (InvalidOperationException ex)
+        {
+            throw ex;
+        }
+    }
+
+    public async Task<CandidateResponseDto?> UpdateAsync(int id, CandidateUpdateDto candidateUpdateDto)
+    {
+        var existingCandidate = await _candidateRepository.GetByIdAsync(id);
+        if (existingCandidate == null)
+            return null;
+
+        if (!string.IsNullOrWhiteSpace(candidateUpdateDto.Email) && 
+            !candidateUpdateDto.Email.Equals(existingCandidate.Email, StringComparison.OrdinalIgnoreCase))
+        {
+            var allCandidates = await _candidateRepository.GetAllAsync();
+            if (allCandidates.Any(c => c.Email.Equals(candidateUpdateDto.Email, StringComparison.OrdinalIgnoreCase)))
+            {
+                throw new InvalidOperationException("Email already exists.");
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(candidateUpdateDto.FullName) && 
+            !candidateUpdateDto.FullName.Equals(existingCandidate.FullName, StringComparison.OrdinalIgnoreCase))
+        {
+            var candidateWithName = await _candidateRepository.GetByNameAsync(candidateUpdateDto.FullName);
+            if (candidateWithName != null)
+            {
+                throw new InvalidOperationException("Candidate name already exists.");
+            }
+        }
+
+        var candidateToUpdate = new Candidate
+        {
+            FullName = candidateUpdateDto.FullName ?? existingCandidate.FullName,
+            DateOfBirth = candidateUpdateDto.DateOfBirth ?? existingCandidate.DateOfBirth,
+            ContactNumber = candidateUpdateDto.ContactNumber ?? existingCandidate.ContactNumber,
+            Email = candidateUpdateDto.Email ?? existingCandidate.Email
+        };
+
+        var updatedCandidate = await _candidateRepository.UpdateAsync(id, candidateToUpdate);
+        return updatedCandidate == null ? null : MapToResponseDto(updatedCandidate);
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        return await _candidateRepository.DeleteAsync(id);
+    }
+
+    public async Task<CandidateResponseDto?> AddSkillToCandidateAsync(int candidateId, int skillId)
+    {
+        var candidate = await _candidateRepository.AddSkillToCandidateAsync(candidateId, skillId);
+        return candidate == null ? null : MapToResponseDto(candidate);
+    }
+
+    public async Task<CandidateResponseDto?> RemoveSkillFromCandidateAsync(int candidateId, int skillId)
+    {
+        var candidate = await _candidateRepository.RemoveSkillFromCandidateAsync(candidateId, skillId);
+        return candidate == null ? null : MapToResponseDto(candidate);
+    }
+
+    private CandidateResponseDto MapToResponseDto(Candidate candidate)
+    {
+        return new CandidateResponseDto
+        {
+            Id = candidate.Id,
+            FullName = candidate.FullName,
+            DateOfBirth = candidate.DateOfBirth,
+            ContactNumber = candidate.ContactNumber,
+            Email = candidate.Email,
+            SkillNames = candidate.Skills.Select(s => s.Name).ToList()
+        };
+    }
+}

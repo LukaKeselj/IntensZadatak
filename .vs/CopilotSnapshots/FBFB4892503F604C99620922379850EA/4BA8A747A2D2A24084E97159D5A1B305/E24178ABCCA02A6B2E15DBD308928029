@@ -1,0 +1,277 @@
+﻿using Xunit;
+using Microsoft.EntityFrameworkCore;
+using HRCandidateManagement.Data;
+using HRCandidateManagement.Models;
+using HRCandidateManagement.Repositories;
+
+namespace HRCandidateManagement.Tests;
+
+public class SkillRepositoryTests
+{
+    private AppDbContext CreateContext()
+    {
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .Options;
+
+        return new AppDbContext(options);
+    }
+
+    #region GetAllAsync Tests
+
+    [Fact]
+    public async Task GetAllAsync_WithMultipleSkills_ReturnsAllSkills()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skills = new List<Skill>
+        {
+            new Skill { Name = "C#" },
+            new Skill { Name = "JavaScript" },
+            new Skill { Name = "Python" }
+        };
+
+        context.Skills.AddRange(skills);
+        await context.SaveChangesAsync();
+
+        var result = await skillRepository.GetAllAsync();
+
+        Assert.NotNull(result);
+        Assert.Equal(3, result.Count());
+        Assert.Contains(result, s => s.Name == "C#");
+        Assert.Contains(result, s => s.Name == "JavaScript");
+        Assert.Contains(result, s => s.Name == "Python");
+    }
+
+    [Fact]
+    public async Task GetAllAsync_WithNoSkills_ReturnsEmptyList()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var result = await skillRepository.GetAllAsync();
+
+        Assert.NotNull(result);
+        Assert.Empty(result);
+    }
+
+    #endregion
+
+    #region GetByIdAsync Tests
+
+    [Fact]
+    public async Task GetByIdAsync_WithValidId_ReturnsCorrectSkill()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill = new Skill { Name = "C#" };
+        context.Skills.Add(skill);
+        await context.SaveChangesAsync();
+
+        var result = await skillRepository.GetByIdAsync(skill.Id);
+
+        Assert.NotNull(result);
+        Assert.Equal(skill.Id, result.Id);
+        Assert.Equal("C#", result.Name);
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_WithInvalidId_ReturnsNull()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var result = await skillRepository.GetByIdAsync(999);
+
+        Assert.Null(result);
+    }
+
+    #endregion
+
+    #region GetByNameAsync Tests
+
+    [Fact]
+    public async Task GetByNameAsync_WithExactName_ReturnsSkill()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill = new Skill { Name = "C#" };
+        context.Skills.Add(skill);
+        await context.SaveChangesAsync();
+
+        var result = await skillRepository.GetByNameAsync("C#");
+
+        Assert.NotNull(result);
+        Assert.Equal("C#", result.Name);
+    }
+
+    [Fact]
+    public async Task GetByNameAsync_WithDifferentCase_ReturnsSkill()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill = new Skill { Name = "C#" };
+        context.Skills.Add(skill);
+        await context.SaveChangesAsync();
+
+        var result = await skillRepository.GetByNameAsync("c#");
+
+        Assert.NotNull(result);
+        Assert.Equal("C#", result.Name);
+    }
+
+    [Fact]
+    public async Task GetByNameAsync_WithNonExistentName_ReturnsNull()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill = new Skill { Name = "C#" };
+        context.Skills.Add(skill);
+        await context.SaveChangesAsync();
+
+        var result = await skillRepository.GetByNameAsync("NonExistent");
+
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task GetByNameAsync_WithEmptyDatabase_ReturnsNull()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var result = await skillRepository.GetByNameAsync("C#");
+
+        Assert.Null(result);
+    }
+
+    #endregion
+
+    #region AddAsync Tests
+
+    [Fact]
+    public async Task AddAsync_WithValidSkill_CreatesSkillSuccessfully()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill = new Skill { Name = "Java" };
+
+        var result = await skillRepository.AddAsync(skill);
+
+        Assert.NotNull(result);
+        Assert.True(result.Id > 0);
+        Assert.Equal("Java", result.Name);
+
+        var savedSkill = await context.Skills.FindAsync(result.Id);
+        Assert.NotNull(savedSkill);
+        Assert.Equal("Java", savedSkill.Name);
+    }
+
+    [Fact]
+    public async Task AddAsync_WithMultipleSkills_CreatesAllSkillsSuccessfully()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill1 = new Skill { Name = "C#" };
+        var skill2 = new Skill { Name = "JavaScript" };
+
+        var result1 = await skillRepository.AddAsync(skill1);
+        var result2 = await skillRepository.AddAsync(skill2);
+
+        Assert.True(result1.Id > 0);
+        Assert.True(result2.Id > 0);
+        Assert.NotEqual(result1.Id, result2.Id);
+
+        var allSkills = await skillRepository.GetAllAsync();
+        Assert.Equal(2, allSkills.Count());
+    }
+
+    #endregion
+
+    #region DeleteAsync Tests
+
+    [Fact]
+    public async Task DeleteAsync_WithValidId_DeletesSkillSuccessfully()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill = new Skill { Name = "C#" };
+        context.Skills.Add(skill);
+        await context.SaveChangesAsync();
+
+        var result = await skillRepository.DeleteAsync(skill.Id);
+
+        Assert.True(result);
+
+        var deletedSkill = await context.Skills.FindAsync(skill.Id);
+        Assert.Null(deletedSkill);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_WithInvalidId_ReturnsFalse()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var result = await skillRepository.DeleteAsync(999);
+
+        Assert.False(result);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_WithValidId_DoesNotAffectOtherSkills()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill1 = new Skill { Name = "C#" };
+        var skill2 = new Skill { Name = "JavaScript" };
+        context.Skills.AddRange(skill1, skill2);
+        await context.SaveChangesAsync();
+
+        await skillRepository.DeleteAsync(skill1.Id);
+
+        var remainingSkills = await skillRepository.GetAllAsync();
+        Assert.Single(remainingSkills);
+        Assert.Equal("JavaScript", remainingSkills.First().Name);
+    }
+
+    #endregion
+
+    #region Integration Tests
+
+    [Fact]
+    public async Task CompleteWorkflow_CreateReadUpdate_SuccessfullyManipulatesSkill()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill = new Skill { Name = "C#" };
+
+        var createdSkill = await skillRepository.AddAsync(skill);
+
+        var retrievedSkill = await skillRepository.GetByIdAsync(createdSkill.Id);
+        var skillByName = await skillRepository.GetByNameAsync("C#");
+
+        Assert.NotNull(retrievedSkill);
+        Assert.NotNull(skillByName);
+        Assert.Equal(createdSkill.Id, retrievedSkill.Id);
+        Assert.Equal("C#", retrievedSkill.Name);
+
+        var deleteResult = await skillRepository.DeleteAsync(createdSkill.Id);
+
+        Assert.True(deleteResult);
+        var deletedSkill = await skillRepository.GetByIdAsync(createdSkill.Id);
+        Assert.Null(deletedSkill);
+    }
+
+    #endregion
+}

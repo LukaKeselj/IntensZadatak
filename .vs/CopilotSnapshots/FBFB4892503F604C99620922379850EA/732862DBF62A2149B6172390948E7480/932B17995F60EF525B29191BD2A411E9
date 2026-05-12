@@ -1,0 +1,86 @@
+﻿using Microsoft.EntityFrameworkCore;
+using HRCandidateManagement.Data;
+using HRCandidateManagement.Models;
+
+namespace HRCandidateManagement.Repositories;
+
+public class SkillRepository : ISkillRepository
+{
+    private readonly AppDbContext _context;
+
+    public SkillRepository(AppDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IEnumerable<Skill>> GetAllAsync()
+    {
+        return await _context.Skills.ToListAsync();
+    }
+
+    public async Task<Skill?> GetByIdAsync(int id)
+    {
+        return await _context.Skills.FindAsync(id);
+    }
+
+    public async Task<Skill?> GetByNameAsync(string name)
+    {
+        return await _context.Skills
+            .FirstOrDefaultAsync(s => s.Name.ToLower() == name.ToLower());
+    }
+
+    public async Task<Skill> AddAsync(Skill skill)
+    {
+        // Proveri da li postoji veština sa istim imenom (case-insensitive)
+        var existingSkill = await _context.Skills
+            .FirstOrDefaultAsync(s => s.Name.ToLower() == skill.Name.ToLower());
+
+        if (existingSkill != null)
+        {
+            throw new InvalidOperationException("Skill name already exists.");
+        }
+
+        _context.Skills.Add(skill);
+        await _context.SaveChangesAsync();
+        return skill;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var skill = await _context.Skills.FindAsync(id);
+        if (skill == null)
+            return false;
+
+        _context.Skills.Remove(skill);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<Skill?> UpdateAsync(int id, Skill skillUpdate)
+    {
+        var skill = await _context.Skills.FindAsync(id);
+        if (skill == null)
+            return null;
+
+        // Proveri da li novo ime postoji kod druge veštine (ako se menja)
+        if (!string.IsNullOrWhiteSpace(skillUpdate.Name) && 
+            !skillUpdate.Name.Equals(skill.Name, StringComparison.OrdinalIgnoreCase))
+        {
+            var existingSkill = await _context.Skills
+                .FirstOrDefaultAsync(s => s.Id != id && 
+                                        s.Name.ToLower() == skillUpdate.Name.ToLower());
+
+            if (existingSkill != null)
+            {
+                throw new InvalidOperationException("Skill name already exists.");
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(skillUpdate.Name))
+            skill.Name = skillUpdate.Name;
+
+        _context.Skills.Update(skill);
+        await _context.SaveChangesAsync();
+        return skill;
+    }
+}

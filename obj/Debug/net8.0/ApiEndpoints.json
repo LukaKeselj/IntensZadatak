@@ -285,6 +285,37 @@
   },
   {
     "ContainingType": "HRCandidateManagement.Controllers.SkillsController",
+    "Method": "Update",
+    "RelativePath": "api/Skills/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "skillUpdateDto",
+        "Type": "HRCandidateManagement.DTOs.SkillUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "HRCandidateManagement.DTOs.SkillResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "HRCandidateManagement.Controllers.SkillsController",
     "Method": "Delete",
     "RelativePath": "api/Skills/{id}",
     "HttpMethod": "DELETE",

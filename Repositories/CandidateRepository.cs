@@ -27,6 +27,12 @@ public class CandidateRepository : ICandidateRepository
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
+    public async Task<Candidate?> GetByNameAsync(string name)
+    {
+        return await _context.Candidates
+            .FirstOrDefaultAsync(c => c.FullName.ToLower() == name.ToLower());
+    }
+
     public async Task<IEnumerable<Candidate>> SearchAsync(string? name, IEnumerable<string>? skillNames)
     {
         var query = _context.Candidates
@@ -50,6 +56,22 @@ public class CandidateRepository : ICandidateRepository
 
     public async Task<Candidate> AddAsync(Candidate candidate)
     {
+        var existingCandidateWithName = await _context.Candidates
+            .FirstOrDefaultAsync(c => c.FullName.ToLower() == candidate.FullName.ToLower());
+
+        if (existingCandidateWithName != null)
+        {
+            throw new InvalidOperationException("Candidate name already exists.");
+        }
+
+        var existingCandidateWithEmail = await _context.Candidates
+            .FirstOrDefaultAsync(c => c.Email.ToLower() == candidate.Email.ToLower());
+
+        if (existingCandidateWithEmail != null)
+        {
+            throw new InvalidOperationException("Email already exists.");
+        }
+
         _context.Candidates.Add(candidate);
         await _context.SaveChangesAsync();
         return candidate;
@@ -60,6 +82,32 @@ public class CandidateRepository : ICandidateRepository
         var candidate = await _context.Candidates.FindAsync(id);
         if (candidate == null)
             return null;
+
+        if (!string.IsNullOrWhiteSpace(candidateUpdate.FullName) && 
+            !candidateUpdate.FullName.Equals(candidate.FullName, StringComparison.OrdinalIgnoreCase))
+        {
+            var existingCandidateWithName = await _context.Candidates
+                .FirstOrDefaultAsync(c => c.Id != id && 
+                                        c.FullName.ToLower() == candidateUpdate.FullName.ToLower());
+
+            if (existingCandidateWithName != null)
+            {
+                throw new InvalidOperationException("Candidate name already exists.");
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(candidateUpdate.Email) && 
+            !candidateUpdate.Email.Equals(candidate.Email, StringComparison.OrdinalIgnoreCase))
+        {
+            var existingCandidateWithEmail = await _context.Candidates
+                .FirstOrDefaultAsync(c => c.Id != id && 
+                                        c.Email.ToLower() == candidateUpdate.Email.ToLower());
+
+            if (existingCandidateWithEmail != null)
+            {
+                throw new InvalidOperationException("Email already exists.");
+            }
+        }
 
         if (!string.IsNullOrWhiteSpace(candidateUpdate.FullName))
             candidate.FullName = candidateUpdate.FullName;

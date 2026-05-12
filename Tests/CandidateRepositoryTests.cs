@@ -34,7 +34,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task GetAllAsync_WithMultipleCandidates_ReturnsAllCandidates()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -48,10 +47,8 @@ public class CandidateRepositoryTests
         context.Candidates.AddRange(candidates);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.GetAllAsync();
 
-        // Assert
         Assert.NotNull(result);
         Assert.Equal(3, result.Count());
         Assert.Contains(result, c => c.FullName == "John Doe");
@@ -62,14 +59,11 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task GetAllAsync_WithNoCandidates_ReturnsEmptyList()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
-        // Act
         var result = await repository.GetAllAsync();
 
-        // Assert
         Assert.NotNull(result);
         Assert.Empty(result);
     }
@@ -77,7 +71,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task GetAllAsync_IncludesSkills()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -90,14 +83,63 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.GetAllAsync();
 
-        // Assert
         Assert.NotEmpty(result);
         var retrievedCandidate = result.First();
         Assert.NotEmpty(retrievedCandidate.Skills);
         Assert.Contains(retrievedCandidate.Skills, s => s.Name == "C#");
+    }
+
+    #endregion
+
+    #region GetByNameAsync Tests
+
+    [Fact]
+    public async Task GetByNameAsync_WithExactName_ReturnsCandidate()
+    {
+        using var context = CreateContext();
+        var repository = new CandidateRepository(context);
+
+        var candidate = CreateTestCandidate("John Doe");
+        context.Candidates.Add(candidate);
+        await context.SaveChangesAsync();
+
+        var result = await repository.GetByNameAsync("John Doe");
+
+        Assert.NotNull(result);
+        Assert.Equal("John Doe", result.FullName);
+    }
+
+    [Fact]
+    public async Task GetByNameAsync_WithDifferentCase_ReturnsCandidate()
+    {
+        using var context = CreateContext();
+        var repository = new CandidateRepository(context);
+
+        var candidate = CreateTestCandidate("John Doe");
+        context.Candidates.Add(candidate);
+        await context.SaveChangesAsync();
+
+        var result = await repository.GetByNameAsync("john doe");
+
+        Assert.NotNull(result);
+        Assert.Equal("John Doe", result.FullName);
+    }
+
+    [Fact]
+    public async Task GetByNameAsync_WithNonExistentName_ReturnsNull()
+    {
+        using var context = CreateContext();
+        var repository = new CandidateRepository(context);
+
+        var candidate = CreateTestCandidate("John Doe");
+        context.Candidates.Add(candidate);
+        await context.SaveChangesAsync();
+
+        var result = await repository.GetByNameAsync("NonExistent");
+
+        Assert.Null(result);
     }
 
     #endregion
@@ -107,7 +149,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task GetByIdAsync_WithValidId_ReturnsCorrectCandidate()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -115,10 +156,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.GetByIdAsync(candidate.Id);
 
-        // Assert
         Assert.NotNull(result);
         Assert.Equal(candidate.Id, result.Id);
         Assert.Equal("John Doe", result.FullName);
@@ -127,21 +166,17 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task GetByIdAsync_WithInvalidId_ReturnsNull()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
-        // Act
         var result = await repository.GetByIdAsync(999);
 
-        // Assert
         Assert.Null(result);
     }
 
     [Fact]
     public async Task GetByIdAsync_IncludesSkills()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -154,10 +189,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.GetByIdAsync(candidate.Id);
 
-        // Assert
         Assert.NotNull(result);
         Assert.NotEmpty(result.Skills);
         Assert.Contains(result.Skills, s => s.Name == "JavaScript");
@@ -170,7 +203,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task SearchAsync_WithNameFilter_ReturnsMatchingCandidates()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -183,10 +215,8 @@ public class CandidateRepositoryTests
         context.Candidates.AddRange(candidates);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.SearchAsync("John", null);
 
-        // Assert
         Assert.Single(result);
         Assert.Equal("John Doe", result.First().FullName);
     }
@@ -194,7 +224,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task SearchAsync_WithSkillFilter_ReturnsMatchingCandidates()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -207,10 +236,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.SearchAsync(null, new List<string> { "C#" });
 
-        // Assert
         Assert.NotEmpty(result);
         Assert.Contains(result, c => c.FullName == "John Doe");
     }
@@ -218,7 +245,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task SearchAsync_WithNameAndSkillFilters_ReturnsMatchingCandidates()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -236,10 +262,8 @@ public class CandidateRepositoryTests
         context.Candidates.AddRange(candidate1, candidate2);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.SearchAsync("John", new List<string> { "C#" });
 
-        // Assert
         Assert.Single(result);
         Assert.Equal("John Doe", result.First().FullName);
     }
@@ -247,7 +271,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task SearchAsync_WithNoMatches_ReturnsEmptyList()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -255,17 +278,14 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.SearchAsync("NonExistent", null);
 
-        // Assert
         Assert.Empty(result);
     }
 
     [Fact]
     public async Task SearchAsync_WithSkillFilterCaseInsensitive_ReturnsMatchingCandidates()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -278,10 +298,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.SearchAsync(null, new List<string> { "c#" });
 
-        // Assert
         Assert.NotEmpty(result);
     }
 
@@ -292,16 +310,13 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task AddAsync_WithValidCandidate_CreatesSuccessfully()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
         var candidate = CreateTestCandidate();
 
-        // Act
         var result = await repository.AddAsync(candidate);
 
-        // Assert
         Assert.NotNull(result);
         Assert.True(result.Id > 0);
         Assert.Equal("John Doe", result.FullName);
@@ -314,18 +329,15 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task AddAsync_WithMultipleCandidates_CreatesAllSuccessfully()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
         var candidate1 = CreateTestCandidate("John Doe", "john@example.com");
         var candidate2 = CreateTestCandidate("Jane Smith", "jane@example.com");
 
-        // Act
         var result1 = await repository.AddAsync(candidate1);
         var result2 = await repository.AddAsync(candidate2);
 
-        // Assert
         Assert.True(result1.Id > 0);
         Assert.True(result2.Id > 0);
         Assert.NotEqual(result1.Id, result2.Id);
@@ -341,7 +353,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task UpdateAsync_WithValidData_UpdatesSuccessfully()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -357,10 +368,8 @@ public class CandidateRepositoryTests
             ContactNumber = "987654321"
         };
 
-        // Act
         var result = await repository.UpdateAsync(candidate.Id, updatedCandidate);
 
-        // Assert
         Assert.NotNull(result);
         Assert.Equal("Updated Name", result.FullName);
         Assert.Equal("updated@example.com", result.Email);
@@ -372,23 +381,19 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task UpdateAsync_WithInvalidId_ReturnsNull()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
         var candidateUpdate = CreateTestCandidate("Updated", "updated@example.com");
 
-        // Act
         var result = await repository.UpdateAsync(999, candidateUpdate);
 
-        // Assert
         Assert.Null(result);
     }
 
     [Fact]
     public async Task UpdateAsync_WithPartialUpdate_UpdatesOnlyProvidedFields()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -406,10 +411,8 @@ public class CandidateRepositoryTests
             ContactNumber = null
         };
 
-        // Act
         var result = await repository.UpdateAsync(candidate.Id, partialUpdate);
 
-        // Assert
         Assert.NotNull(result);
         Assert.Equal("Updated Name", result.FullName);
         Assert.Equal(originalContactNumber, result.ContactNumber);
@@ -422,7 +425,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task DeleteAsync_WithValidId_DeletesSuccessfully()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -430,10 +432,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.DeleteAsync(candidate.Id);
 
-        // Assert
         Assert.True(result);
 
         var deletedCandidate = await context.Candidates.FindAsync(candidate.Id);
@@ -443,21 +443,17 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task DeleteAsync_WithInvalidId_ReturnsFalse()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
-        // Act
         var result = await repository.DeleteAsync(999);
 
-        // Assert
         Assert.False(result);
     }
 
     [Fact]
     public async Task DeleteAsync_WithValidId_DoesNotAffectOtherCandidates()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -466,10 +462,8 @@ public class CandidateRepositoryTests
         context.Candidates.AddRange(candidate1, candidate2);
         await context.SaveChangesAsync();
 
-        // Act
         await repository.DeleteAsync(candidate1.Id);
 
-        // Assert
         var remainingCandidates = await repository.GetAllAsync();
         Assert.Single(remainingCandidates);
         Assert.Equal("Jane Smith", remainingCandidates.First().FullName);
@@ -482,7 +476,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task AddSkillToCandidateAsync_WithValidIds_AddsSkillSuccessfully()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -494,10 +487,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.AddSkillToCandidateAsync(candidate.Id, skill.Id);
 
-        // Assert
         Assert.NotNull(result);
         Assert.Contains(result.Skills, s => s.Name == "C#");
     }
@@ -505,7 +496,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task AddSkillToCandidateAsync_WithInvalidCandidateId_ReturnsNull()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -513,17 +503,14 @@ public class CandidateRepositoryTests
         context.Skills.Add(skill);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.AddSkillToCandidateAsync(999, skill.Id);
 
-        // Assert
         Assert.Null(result);
     }
 
     [Fact]
     public async Task AddSkillToCandidateAsync_WithInvalidSkillId_ReturnsNull()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -531,17 +518,14 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.AddSkillToCandidateAsync(candidate.Id, 999);
 
-        // Assert
         Assert.Null(result);
     }
 
     [Fact]
     public async Task AddSkillToCandidateAsync_WithDuplicateSkill_DoesNotAddDuplicate()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -554,10 +538,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.AddSkillToCandidateAsync(candidate.Id, skill.Id);
 
-        // Assert
         Assert.NotNull(result);
         Assert.Single(result.Skills.Where(s => s.Name == "C#"));
     }
@@ -565,7 +547,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task RemoveSkillFromCandidateAsync_WithValidIds_RemovesSkillSuccessfully()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -578,10 +559,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.RemoveSkillFromCandidateAsync(candidate.Id, skill.Id);
 
-        // Assert
         Assert.NotNull(result);
         Assert.Empty(result.Skills);
     }
@@ -589,21 +568,17 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task RemoveSkillFromCandidateAsync_WithInvalidCandidateId_ReturnsNull()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
-        // Act
         var result = await repository.RemoveSkillFromCandidateAsync(999, 1);
 
-        // Assert
         Assert.Null(result);
     }
 
     [Fact]
     public async Task RemoveSkillFromCandidateAsync_WithNonExistentSkill_DoesNotThrow()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -611,10 +586,8 @@ public class CandidateRepositoryTests
         context.Candidates.Add(candidate);
         await context.SaveChangesAsync();
 
-        // Act
         var result = await repository.RemoveSkillFromCandidateAsync(candidate.Id, 999);
 
-        // Assert
         Assert.NotNull(result);
     }
 
@@ -625,7 +598,6 @@ public class CandidateRepositoryTests
     [Fact]
     public async Task CompleteWorkflow_CreateSearchUpdateDelete_SuccessfullyManipulatesCandidate()
     {
-        // Arrange
         using var context = CreateContext();
         var repository = new CandidateRepository(context);
 
@@ -635,19 +607,15 @@ public class CandidateRepositoryTests
 
         var candidate = CreateTestCandidate("John Doe", "john@example.com");
 
-        // Act - Create
         var createdCandidate = await repository.AddAsync(candidate);
 
-        // Act - Search
         var searchResult = await repository.SearchAsync("John", null);
         Assert.Single(searchResult);
 
-        // Act - Add Skill
         var candidateWithSkill = await repository.AddSkillToCandidateAsync(createdCandidate.Id, skill.Id);
         Assert.NotNull(candidateWithSkill);
         Assert.Single(candidateWithSkill.Skills);
 
-        // Act - Update
         var updatedCandidate = new Candidate
         {
             FullName = "Updated John Doe",
@@ -657,13 +625,11 @@ public class CandidateRepositoryTests
         Assert.NotNull(updateResult);
         Assert.Equal("Updated John Doe", updateResult.FullName);
 
-        // Act - Remove Skill
         var candidateWithoutSkill = await repository.RemoveSkillFromCandidateAsync(
             createdCandidate.Id, skill.Id);
         Assert.NotNull(candidateWithoutSkill);
         Assert.Empty(candidateWithoutSkill.Skills);
 
-        // Act - Delete
         var deleteResult = await repository.DeleteAsync(createdCandidate.Id);
         Assert.True(deleteResult);
 

@@ -246,6 +246,61 @@ public class SkillRepositoryTests
 
     #endregion
 
+    #region UpdateAsync Tests
+
+    [Fact]
+    public async Task UpdateAsync_WithValidIdAndSkill_UpdatesSkillSuccessfully()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill = new Skill { Name = "C#" };
+        context.Skills.Add(skill);
+        await context.SaveChangesAsync();
+
+        var skillToUpdate = new Skill { Name = "Java" };
+        var result = await skillRepository.UpdateAsync(skill.Id, skillToUpdate);
+
+        Assert.NotNull(result);
+        Assert.Equal(skill.Id, result.Id);
+        Assert.Equal("Java", result.Name);
+
+        var updatedSkill = await context.Skills.FindAsync(skill.Id);
+        Assert.Equal("Java", updatedSkill.Name);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithInvalidId_ReturnsNull()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skillToUpdate = new Skill { Name = "Java" };
+        var result = await skillRepository.UpdateAsync(999, skillToUpdate);
+
+        Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithValidId_DoesNotAffectOtherSkills()
+    {
+        using var context = CreateContext();
+        var skillRepository = new SkillRepository(context);
+
+        var skill1 = new Skill { Name = "C#" };
+        var skill2 = new Skill { Name = "JavaScript" };
+        context.Skills.AddRange(skill1, skill2);
+        await context.SaveChangesAsync();
+
+        var skillToUpdate = new Skill { Name = "Java" };
+        await skillRepository.UpdateAsync(skill1.Id, skillToUpdate);
+
+        var unchangedSkill = await skillRepository.GetByIdAsync(skill2.Id);
+        Assert.Equal("JavaScript", unchangedSkill.Name);
+    }
+
+    #endregion
+
     #region Integration Tests
 
     [Fact]
@@ -265,6 +320,12 @@ public class SkillRepositoryTests
         Assert.NotNull(skillByName);
         Assert.Equal(createdSkill.Id, retrievedSkill.Id);
         Assert.Equal("C#", retrievedSkill.Name);
+
+        var skillToUpdate = new Skill { Name = "Java" };
+        var updatedSkill = await skillRepository.UpdateAsync(createdSkill.Id, skillToUpdate);
+
+        Assert.NotNull(updatedSkill);
+        Assert.Equal("Java", updatedSkill.Name);
 
         var deleteResult = await skillRepository.DeleteAsync(createdSkill.Id);
 

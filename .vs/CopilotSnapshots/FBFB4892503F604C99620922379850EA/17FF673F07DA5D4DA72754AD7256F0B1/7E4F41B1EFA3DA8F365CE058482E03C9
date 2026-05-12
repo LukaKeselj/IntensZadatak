@@ -1,0 +1,256 @@
+﻿# HR Candidate Management System
+
+Sveobuhvatna ASP.NET Core Web API aplikacija za upravljanje kandidatima i njihovim stručnim veštinama.
+
+## 📋 Pregled Projekta
+
+Ovaj projekat implementira kompletan HR sistem sa:
+- Upravljanjem kandidatima (CRUD operacije)
+- Upravljanjem veštinama
+- Povezivanjem kandidata sa veštinama
+- Naprednom pretrágom
+- Kompletnim REST API-jem sa Swagger dokumentacijom
+- Sveobuhvatnim test setom (76 testova)
+
+## 🛠️ Tehnološka Struktura
+
+- **.NET 8** - Najnoviji .NET framework
+- **ASP.NET Core Web API** - RESTful API razvoj
+- **Entity Framework Core** - ORM za bazu podataka
+- **SQLite** - Lakša relaciona baza
+- **xUnit + Moq** - Unit testiranje i mocking
+- **Swagger/OpenAPI** - API dokumentacija
+
+## 🏗️ Arhitektura & Dizajn Paterni
+
+### Čista Arhitektura sa Slojevitim Pristupom
+
+Najzanimljiviji aspekt ovog projekta bio je dizajniranje i implementacija **Clean Architecture** paterna sa jasnom separacijom odgovornosti kroz više slojeva:
+
+```
+┌─────────────────────────────────────┐
+│   Controllers (API Krajnje Tačke)   │
+├─────────────────────────────────────┤
+│   Services (Biznis Logika)          │
+├─────────────────────────────────────┤
+│   Repositories (Pristup Podacima)   │
+├─────────────────────────────────────┤
+│   Data Layer (DbContext/EF)         │
+├─────────────────────────────────────┤
+│   Baza Podataka (SQLite)            │
+└─────────────────────────────────────┘
+```
+
+#### Zašto Ova Arhitektura? 🤔
+
+Za **slojevitu arhitekturu** sam se odlučio jer mi je taj pristup najpoznatiji sa fakulteta. Želeo sam da primenim akademsko znanje u praksi i osiguram jasnu podelu između biznis logike i pristupa podacima. Ovakav dizajn čini kod profesionalnim, lakšim za održavanje i spremnim za dalje proširivanje.
+
+**Prednosti:**
+
+1. **Separacija Odgovornosti** - Svaki sloj ima jednu ulogu:
+   - Controllers: HTTP zahtevi/odgovori
+   - Services: Biznis logika i validacija
+   - Repositories: Apstrakcija pristupa podacima
+   - Data: EF Core operacije
+
+2. **Testabilnost** - Servisi i repozitorijumi se lako mogu mocking-ovati
+
+3. **Održivost** - Promene u jednom sloju ne utiču na ostale
+
+4. **Ponovno Iskorišćenje** - Servisi se mogu koristiti na više mesta
+
+5. **Dependency Injection** - Labava kuplovanja između slojeva
+
+#### Korišćeni Dizajn Paterni
+
+- **Repository Pattern** - Apstrakcija pristupa podacima
+- **Service Layer Pattern** - Enkapsulacija biznis logike
+- **DTO (Data Transfer Object)** - Separacija domenskih modela od API ugovora
+- **Dependency Injection** - Invertovanje kontrole za bolju testabilnost
+- **Generic Repository** - Bazni `IRepository<T>` interfejs za CRUD
+
+---
+
+## 🧪 Unit Testiranje - Najzahtevniji Deo
+
+Najzahtevniji aspekt ovog projekta bio je **pisanje sveobuhvatnih unit testova**. Evo zašto:
+
+### Prevaziđeni Izazovi
+
+#### 1. **Kompleksnost Mock Konfiguracije**
+- Postavljanje više mock repozitorijuma sa ispravnim `Returns` konfiguracijama
+- Razumevanje kada koristiti `ReturnsAsync()` vs `Returns()`
+- Pravi `It.IsAny<T>()` za generičke metode
+
+#### 2. **Granice i Validacija**
+- Testiranje case-insensitive validacije mejla
+- Verifikacija logike prevencije duplikata
+- Testiranje parcijalnih ažuriranja gde su neka polja null
+- Osiguranje da transakcije ne utiču na neuključene podatke
+
+#### 3. **Integracioni Testovi sa In-Memory Bazom**
+- Kreiranje izolovanih in-memory baza za svaki test (korišćenje `Guid.NewGuid()`)
+- Osiguranje da testovi ne utiču jedni na druge
+- Pravilno čišćenje nakon svakog testa
+- Testiranje Many-to-Many relacija
+
+#### 4. **Verifikacija i Assertions**
+- Korišćenje `Verify()` za proveru da se metode pozivaju ispravan broj puta
+- Kompleksni assertions sa `Assert.Collection()` za verifikovanje redosleda
+- Testiranje pozitivnih i negativnih scenarija
+- Osiguranje da se repozitorijumske metode ne pozivaju nepotrebno
+
+### Pokrivanje Testima
+
+Implementacija 76 testova bila je najteži zadatak jer je zahtevala pokrivanje svih scenarija – od validacije unosa (poput case-insensitive mejlova) do kompleksnih Many-to-Many relacija. Najveći izazov bio je pravilno setovanje Moq biblioteke i osiguravanje potpune izolacije testova pomoću in-memory baze podataka. Cilj mi je bio da kroz visok nivo pokrivenosti dokažem stabilnost i otpornost aplikacije na greške.
+
+```
+✅ 76 Ukupnih Testova
+✅ 100% Stopa Prolaska
+✅ 4 Test Klase (2 Service + 2 Repository)
+
+Razrada Testova:
+- SkillServiceTests:        13 testova
+- SkillRepositoryTests:     17 testova
+- CandidateServiceTests:    18 testova
+- CandidateRepositoryTests: 28 testova
+
+Pokriveni Területi:
+✅ CRUD Operacije (Create, Read, Update, Delete)
+✅ Validaciona Logika (Duplikati, Case-insensitivity)
+✅ Graničnih Slučajeva (Prazni rezultati, Nevažeći ID-evi)
+✅ Upravljanja Relacijama (Asoijacije veština)
+✅ Pretraga & Filtriranje
+✅ Rukovanje Greškama
+✅ Integracioni Scenariji
+```
+
+### Zašto je Testiranje bilo Zahtevno
+
+1. **Vremenski Intenzivno** - Pisanje 76 značajnih testova zahteva vreme
+2. **Mentalni Model** - Razumevanje šta testirati I kako testirati
+3. **Izolacija** - Osiguranje da je svaki test nezavisan i ponovljiv
+4. **Sveobuhvatnost** - Uravnoteživanje pokrivenosti bez redundantnih testova
+5. **Održavanje** - Testovi moraju biti održavani sa kodom
+
+---
+
+## 📊 Ključne Karakteristike
+
+### ✅ Implementirani Zahtevi
+
+| Zahtev | Status | Implementacija |
+|---|---|---|
+| Baza i Tabele | ✅ | Candidate, Skill, Many-to-Many tabela |
+| Service & Modeli | ✅ | 2 Servisa, 2 Repozitorijuma, 5 DTO-ova |
+| REST API Krajnje Tačke | ✅ | 12+ krajnjih tačaka |
+| Dodaj Kandidata | ✅ | `POST /api/candidates` |
+| Dodaj Veštine | ✅ | `POST /api/skills` |
+| Ažuriraj Kandidata sa Veštinom | ✅ | `POST /api/candidates/{id}/skills/{skillId}` |
+| Ukloni Veštinu od Kandidata | ✅ | `DELETE /api/candidates/{id}/skills/{skillId}` |
+| Obriši Kandidata | ✅ | `DELETE /api/candidates/{id}` |
+| Pretraga po Imenu | ✅ | `GET /api/candidates/search?name=X` |
+| Pretraga po Veštinama | ✅ | `GET /api/candidates/search?skills=Java,C%23` |
+| Seed Podaci | ✅ | 5 kandidata + 8 veština sa relacijama |
+| Ograničenja & Validacija | ✅ | Jedinstveni mejl/veština, case-insensitive pretraga |
+| Unit Testovi | ✅ | 76 testova, 100% prolaska |
+
+---
+
+## 🚀 Početak
+
+### Preduslovi
+- .NET 8 SDK
+- Visual Studio 2022+ ili VS Code
+- Git
+
+### Instalacija i Pokretanje
+
+```bash
+# Kloniraj repozitorijum
+git clone https://github.com/LukaKeselj/IntensZadatak.git
+cd IntensZadatak
+
+# Restauriraj zavisnosti
+dotnet restore
+
+# Izgradi projekat
+dotnet build
+
+# Pokreni aplikaciju
+dotnet run
+
+# Pokreni testove
+dotnet test
+```
+
+### Pristup API-ju
+
+Kada je aplikacija pokrenuta, pristup Swagger UI:
+```
+https://localhost:5001/swagger
+```
+
+---
+
+## 📚 API Krajnje Tačke - Brzo Referenciranje
+
+### Kandidati
+- `GET /api/candidates` - Dobij sve kandidate
+- `GET /api/candidates/{id}` - Dobij kandidata po ID
+- `GET /api/candidates/search?name={name}&skills={skills}` - Pretraži kandidate
+- `POST /api/candidates` - Napravi novog kandidata
+- `PUT /api/candidates/{id}` - Ažuriraj kandidata
+- `DELETE /api/candidates/{id}` - Obriši kandidata
+- `POST /api/candidates/{candidateId}/skills/{skillId}` - Dodaj veštinu
+- `DELETE /api/candidates/{candidateId}/skills/{skillId}` - Ukloni veštinu
+
+### Veštine
+- `GET /api/skills` - Dobij sve veštine
+- `GET /api/skills/{id}` - Dobij veštinu po ID
+- `POST /api/skills` - Napravi novu veštinu
+- `PUT /api/skills/{id}` - Ažuriraj veštinu
+- `DELETE /api/skills/{id}` - Obriši veštinu
+
+---
+
+## 🧠 Ključna Znanja
+
+### Arhitektura
+**Clean Architecture sa slojevitim pristupom** je bio najzadovoljniji deo jer:
+- Demonstrira profesionalne principe dizajna softvera
+- Svaki sloj ima jasnu, jednu ulogu
+- Dizajn čini kod testabilnim, održivim i skalabilnim
+- Ovo je patern korišćen u stvarnim poslovnim aplikacijama
+
+### Testiranje
+Unit testiranje je bilo najizazovnije ali nagradujuće:
+- Naučio napredne Moq konfiguracije
+- Razumeo važnost izolacije testova
+- Cenio sam kako testovi pokretaju bolji API dizajn
+- Shvatio sam da sveobuhvatno testiranje sprečava greške
+
+---
+
+## 📝 Napomene
+
+- Baza koristi SQLite sa automatskim migracijama pri startanju
+- Seed podaci uključuju 5 uzoraka kandidata i 8 uzoraka veština
+- Sva mejl adresa i imena veština su case-insensitive ali jedinstveni
+- Testovi koriste in-memory bazu za brzo, izolovano izvršavanje
+- 100% async/await implementacija kroz cijelu aplikaciju
+
+---
+
+## 👨‍💻 Autor
+
+**Luka Keselj**
+
+## 📄 Licenca
+
+Ovaj projekat je kreiran u edukativne svrhe.
+
+---
+
+**Poslednja Ažuriranja:** Januar 2025  
+**Status Projekta:** ✅ Kompletan i Testiran

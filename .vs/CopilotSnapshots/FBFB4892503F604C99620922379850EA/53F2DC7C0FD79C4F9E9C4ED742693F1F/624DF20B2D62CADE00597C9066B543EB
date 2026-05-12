@@ -1,0 +1,280 @@
+﻿using Xunit;
+using Moq;
+using HRCandidateManagement.DTOs;
+using HRCandidateManagement.Models;
+using HRCandidateManagement.Repositories;
+using HRCandidateManagement.Services;
+
+namespace HRCandidateManagement.Tests;
+
+public class SkillServiceTests
+{
+    private readonly Mock<ISkillRepository> _mockSkillRepository;
+    private readonly SkillService _skillService;
+
+    public SkillServiceTests()
+    {
+        _mockSkillRepository = new Mock<ISkillRepository>();
+        _skillService = new SkillService(_mockSkillRepository.Object);
+    }
+
+    #region GetAllAsync Tests
+
+    [Fact]
+    public async Task GetAllAsync_WithSkills_ReturnsAllSkillsAsDto()
+    {
+        var skills = new List<Skill>
+        {
+            new Skill { Id = 1, Name = "C#" },
+            new Skill { Id = 2, Name = "JavaScript" },
+            new Skill { Id = 3, Name = "Python" }
+        };
+
+        _mockSkillRepository.Setup(r => r.GetAllAsync())
+            .ReturnsAsync(skills);
+
+        var result = await _skillService.GetAllAsync();
+
+        Assert.NotNull(result);
+        Assert.Equal(3, result.Count());
+        Assert.Collection(result,
+            item => Assert.Equal("C#", item.Name),
+            item => Assert.Equal("JavaScript", item.Name),
+            item => Assert.Equal("Python", item.Name)
+        );
+
+        _mockSkillRepository.Verify(r => r.GetAllAsync(), Times.Once);
+    }
+
+    [Fact]
+    public async Task GetAllAsync_WithNoSkills_ReturnsEmptyList()
+    {
+        _mockSkillRepository.Setup(r => r.GetAllAsync())
+            .ReturnsAsync(new List<Skill>());
+
+        var result = await _skillService.GetAllAsync();
+
+        Assert.NotNull(result);
+        Assert.Empty(result);
+        _mockSkillRepository.Verify(r => r.GetAllAsync(), Times.Once);
+    }
+
+    #endregion
+
+    #region GetByIdAsync Tests
+
+    [Fact]
+    public async Task GetByIdAsync_WithValidId_ReturnsSkillAsDto()
+    {
+        int skillId = 1;
+        var skill = new Skill { Id = skillId, Name = "C#" };
+
+        _mockSkillRepository.Setup(r => r.GetByIdAsync(skillId))
+            .ReturnsAsync(skill);
+
+        var result = await _skillService.GetByIdAsync(skillId);
+
+        Assert.NotNull(result);
+        Assert.Equal(skillId, result.Id);
+        Assert.Equal("C#", result.Name);
+        _mockSkillRepository.Verify(r => r.GetByIdAsync(skillId), Times.Once);
+    }
+
+    [Fact]
+    public async Task GetByIdAsync_WithInvalidId_ReturnsNull()
+    {
+        int skillId = 999;
+        _mockSkillRepository.Setup(r => r.GetByIdAsync(skillId))
+            .ReturnsAsync((Skill?)null);
+
+        var result = await _skillService.GetByIdAsync(skillId);
+
+        Assert.Null(result);
+        _mockSkillRepository.Verify(r => r.GetByIdAsync(skillId), Times.Once);
+    }
+
+    #endregion
+
+    #region AddAsync Tests
+
+    [Fact]
+    public async Task AddAsync_WithValidDto_CreatesNewSkill()
+    {
+        var skillCreateDto = new SkillCreateDto { Name = "Java" };
+        var createdSkill = new Skill { Id = 1, Name = "Java" };
+
+        _mockSkillRepository.Setup(r => r.GetByNameAsync("Java"))
+            .ReturnsAsync((Skill?)null);
+
+        _mockSkillRepository.Setup(r => r.AddAsync(It.IsAny<Skill>()))
+            .ReturnsAsync(createdSkill);
+
+        var result = await _skillService.AddAsync(skillCreateDto);
+
+        Assert.NotNull(result);
+        Assert.Equal(1, result.Id);
+        Assert.Equal("Java", result.Name);
+
+        _mockSkillRepository.Verify(r => r.GetByNameAsync("Java"), Times.Once);
+        _mockSkillRepository.Verify(r => r.AddAsync(It.IsAny<Skill>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task AddAsync_WithExistingSkillName_ThrowsInvalidOperationException()
+    {
+        var skillCreateDto = new SkillCreateDto { Name = "C#" };
+        var existingSkill = new Skill { Id = 1, Name = "C#" };
+
+        _mockSkillRepository.Setup(r => r.GetByNameAsync("C#"))
+            .ReturnsAsync(existingSkill);
+
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => _skillService.AddAsync(skillCreateDto)
+        );
+
+        Assert.Equal("Skill name already exists.", exception.Message);
+        _mockSkillRepository.Verify(r => r.GetByNameAsync("C#"), Times.Once);
+        _mockSkillRepository.Verify(r => r.AddAsync(It.IsAny<Skill>()), Times.Never);
+    }
+
+    [Fact]
+    public async Task AddAsync_WithExistingSkillNameDifferentCase_ThrowsInvalidOperationException()
+    {
+        var skillCreateDto = new SkillCreateDto { Name = "c#" };
+        var existingSkill = new Skill { Id = 1, Name = "C#" };
+
+        _mockSkillRepository.Setup(r => r.GetByNameAsync("c#"))
+            .ReturnsAsync(existingSkill);
+
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => _skillService.AddAsync(skillCreateDto)
+        );
+
+        Assert.Equal("Skill name already exists.", exception.Message);
+    }
+
+    #endregion
+
+    #region UpdateAsync Tests
+
+    [Fact]
+    public async Task UpdateAsync_WithValidIdAndDto_UpdatesSkillSuccessfully()
+    {
+        int skillId = 1;
+        var existingSkill = new Skill { Id = skillId, Name = "C#" };
+        var updatedSkill = new Skill { Id = skillId, Name = "Java" };
+        var updateDto = new SkillUpdateDto { Name = "Java" };
+
+        _mockSkillRepository.Setup(r => r.GetByIdAsync(skillId))
+            .ReturnsAsync(existingSkill);
+
+        _mockSkillRepository.Setup(r => r.GetByNameAsync("Java"))
+            .ReturnsAsync((Skill?)null);
+
+        _mockSkillRepository.Setup(r => r.UpdateAsync(skillId, It.IsAny<Skill>()))
+            .ReturnsAsync(updatedSkill);
+
+        var result = await _skillService.UpdateAsync(skillId, updateDto);
+
+        Assert.NotNull(result);
+        Assert.Equal(skillId, result.Id);
+        Assert.Equal("Java", result.Name);
+
+        _mockSkillRepository.Verify(r => r.GetByIdAsync(skillId), Times.Once);
+        _mockSkillRepository.Verify(r => r.GetByNameAsync("Java"), Times.Once);
+        _mockSkillRepository.Verify(r => r.UpdateAsync(skillId, It.IsAny<Skill>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithInvalidId_ReturnsNull()
+    {
+        int skillId = 999;
+        var updateDto = new SkillUpdateDto { Name = "Java" };
+
+        _mockSkillRepository.Setup(r => r.GetByIdAsync(skillId))
+            .ReturnsAsync((Skill?)null);
+
+        var result = await _skillService.UpdateAsync(skillId, updateDto);
+
+        Assert.Null(result);
+        _mockSkillRepository.Verify(r => r.GetByIdAsync(skillId), Times.Once);
+        _mockSkillRepository.Verify(r => r.GetByNameAsync(It.IsAny<string>()), Times.Never);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithExistingSkillName_ThrowsInvalidOperationException()
+    {
+        int skillId = 1;
+        var existingSkill = new Skill { Id = skillId, Name = "C#" };
+        var anotherSkill = new Skill { Id = 2, Name = "Java" };
+        var updateDto = new SkillUpdateDto { Name = "Java" };
+
+        _mockSkillRepository.Setup(r => r.GetByIdAsync(skillId))
+            .ReturnsAsync(existingSkill);
+
+        _mockSkillRepository.Setup(r => r.GetByNameAsync("Java"))
+            .ReturnsAsync(anotherSkill);
+
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => _skillService.UpdateAsync(skillId, updateDto)
+        );
+
+        Assert.Equal("Skill name already exists.", exception.Message);
+        _mockSkillRepository.Verify(r => r.UpdateAsync(It.IsAny<int>(), It.IsAny<Skill>()), Times.Never);
+    }
+
+    [Fact]
+    public async Task UpdateAsync_WithSameSkillName_UpdatesSuccessfully()
+    {
+        int skillId = 1;
+        var existingSkill = new Skill { Id = skillId, Name = "C#" };
+        var updateDto = new SkillUpdateDto { Name = "C#" };
+
+        _mockSkillRepository.Setup(r => r.GetByIdAsync(skillId))
+            .ReturnsAsync(existingSkill);
+
+        _mockSkillRepository.Setup(r => r.GetByNameAsync("C#"))
+            .ReturnsAsync(existingSkill);
+
+        _mockSkillRepository.Setup(r => r.UpdateAsync(skillId, It.IsAny<Skill>()))
+            .ReturnsAsync(existingSkill);
+
+        var result = await _skillService.UpdateAsync(skillId, updateDto);
+
+        Assert.NotNull(result);
+        Assert.Equal("C#", result.Name);
+        _mockSkillRepository.Verify(r => r.UpdateAsync(skillId, It.IsAny<Skill>()), Times.Once);
+    }
+
+    #endregion
+
+    #region DeleteAsync Tests
+
+    [Fact]
+    public async Task DeleteAsync_WithValidId_DeletesSkillSuccessfully()
+    {
+        int skillId = 1;
+        _mockSkillRepository.Setup(r => r.DeleteAsync(skillId))
+            .ReturnsAsync(true);
+
+        var result = await _skillService.DeleteAsync(skillId);
+
+        Assert.True(result);
+        _mockSkillRepository.Verify(r => r.DeleteAsync(skillId), Times.Once);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_WithInvalidId_ReturnsFalse()
+    {
+        int skillId = 999;
+        _mockSkillRepository.Setup(r => r.DeleteAsync(skillId))
+            .ReturnsAsync(false);
+
+        var result = await _skillService.DeleteAsync(skillId);
+
+        Assert.False(result);
+        _mockSkillRepository.Verify(r => r.DeleteAsync(skillId), Times.Once);
+    }
+
+    #endregion
+}

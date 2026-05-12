@@ -31,6 +31,14 @@ public class SkillRepository : ISkillRepository
 
     public async Task<Skill> AddAsync(Skill skill)
     {
+        var existingSkill = await _context.Skills
+            .FirstOrDefaultAsync(s => s.Name.ToLower() == skill.Name.ToLower());
+
+        if (existingSkill != null)
+        {
+            throw new InvalidOperationException("Skill name already exists.");
+        }
+
         _context.Skills.Add(skill);
         await _context.SaveChangesAsync();
         return skill;
@@ -45,5 +53,32 @@ public class SkillRepository : ISkillRepository
         _context.Skills.Remove(skill);
         await _context.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<Skill?> UpdateAsync(int id, Skill skillUpdate)
+    {
+        var skill = await _context.Skills.FindAsync(id);
+        if (skill == null)
+            return null;
+
+        if (!string.IsNullOrWhiteSpace(skillUpdate.Name) && 
+            !skillUpdate.Name.Equals(skill.Name, StringComparison.OrdinalIgnoreCase))
+        {
+            var existingSkill = await _context.Skills
+                .FirstOrDefaultAsync(s => s.Id != id && 
+                                        s.Name.ToLower() == skillUpdate.Name.ToLower());
+
+            if (existingSkill != null)
+            {
+                throw new InvalidOperationException("Skill name already exists.");
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(skillUpdate.Name))
+            skill.Name = skillUpdate.Name;
+
+        _context.Skills.Update(skill);
+        await _context.SaveChangesAsync();
+        return skill;
     }
 }
